@@ -28,7 +28,7 @@ namespace CodeSmellsWithinClasses
 
             Console.WriteLine(dogHouse.Adopt("Pau", DogBreedEnum.GermanShepherd));
 
-            Console.WriteLine(dogHouse.Adopt("Dog killer Phyco", DogBreedEnum.Boxer));
+            Console.WriteLine(dogHouse.Adopt("Dog killer Pshyco", DogBreedEnum.Boxer));
 
             Console.Read();
         }

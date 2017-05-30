@@ -18,7 +18,7 @@ namespace CodeSmellsWithinClasses.ToRefactor
         }
 
         //Calculate the months in the DogHouse.
-        public int HowLogInDogHouse()
+        public int HowLongInDogHouse()
         {
             int months = 0;
             if (!this.IsInDogHouse)

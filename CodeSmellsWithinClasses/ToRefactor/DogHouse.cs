@@ -130,7 +130,7 @@ namespace CodeSmellsWithinClasses.ToRefactor
                     depositPriceDouble = 0;
                     break;
                 default:
-                    var normalDogPrice = dog.HowLogInDogHouse() * 2.0; //2.0 its the IVA
+                    var normalDogPrice = dog.HowLongInDogHouse() * 2.0; //2.0 its the IVA
                     depositPriceDouble = normalDogPrice;
                     break;
             }
