@@ -1,6 +1,6 @@
-﻿namespace CodeSmellsWithinClasses.ToRefactor
+﻿namespace RefactoringDog.Domain.Enums
 {
-    public enum DogBreedEnum
+    public enum DogBreed
     {
         Boxer,
         Bulldog,

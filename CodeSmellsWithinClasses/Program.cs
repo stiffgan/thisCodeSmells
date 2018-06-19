@@ -1,34 +1,41 @@
 ﻿using System;
-using CodeSmellsWithinClasses.ToRefactor;
-
-namespace CodeSmellsWithinClasses
+using RefactoringDogFront.Enum;
+using RefactoringDog.Application.Impl;
+using RefactoringDog.Infrastructure.Mocks;
+using RefactoringDogFront.Mapper;
+using RefactoringDogFront.Refactor;
+namespace RefactoringDogFront
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var pluto = new DogBuilder().WithName("Pluto").WithBreed(DogBreedEnum.Rotweiler).WithAge(1);
-            var chelsea = new DogBuilder().WithName("Chelsea").WithBreed(DogBreedEnum.Boxer).WithAge(2);
-            
-            var rinTinTin = new DogBuilder().WithName("RinTinTin").WithBreed(DogBreedEnum.GermanShepherd).WithAge(5).InDogHouse();
-            var lazie = new DogBuilder().WithName("Lazie").WithBreed(DogBreedEnum.Chihuahua).WithAge(1).InDogHouse();
-            var rex = new DogBuilder().WithName("Rex").WithBreed(DogBreedEnum.GermanShepherd).WithAge(4).InDogHouse();
-             
-            var dogHouse = new DogHouse();
-            dogHouse.Dogs.Add(rinTinTin);
-            dogHouse.Dogs.Add(lazie);
-            dogHouse.Dogs.Add(rex);
+            var pluto = new DogBuilder();
+            var chelsea = new DogBuilder();
+            var rinTinTin = new DogBuilder();
+            var lazie = new DogBuilder();
+            var rex = new DogBuilder();
+
+            pluto.WithName("Pluto").WithBreed(DogBreedEnum.Rotweiler).WithAge(1);
+            chelsea.WithName("Chelsea").WithBreed(DogBreedEnum.Boxer).WithAge(2);
+            rinTinTin.WithName("RintTinTin").WithBreed(DogBreedEnum.GermanShepherd).WithAge(5).InDogHouse();
+            lazie.WithName("Lazie").WithBreed(DogBreedEnum.Chihuahua).WithAge(1).InDogHouse();
+            rex.WithName("Rex").WithBreed(DogBreedEnum.GermanShepherd).WithAge(4).InDogHouse();
 
 
-            Console.WriteLine(dogHouse.Deposit("Amalfi", chelsea));
-            Console.WriteLine(dogHouse.Adopt("Amalfi", DogBreedEnum.Chihuahua));
 
-            Console.WriteLine(dogHouse.Deposit("Georgina", pluto));
-            Console.WriteLine(dogHouse.Adopt("Georgina", DogBreedEnum.GermanShepherd));
+            var dogService = new DogService(new RefactorDogMockRepository(), new TicketService());
 
-            Console.WriteLine(dogHouse.Adopt("Pau", DogBreedEnum.GermanShepherd));
+            Console.WriteLine(dogService.DepositDog(DogMapper.MapDogToDto(chelsea), "Amalfi"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.Chihuahua), "Amalfi"));
 
-            Console.WriteLine(dogHouse.Adopt("Dog killer Pshyco", DogBreedEnum.Boxer));
+            Console.WriteLine(dogService.DepositDog(DogMapper.MapDogToDto(pluto), "Georgina"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.GermanShepherd), "Georgina"));
+
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.GermanShepherd), "Pau"));
+
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.Boxer), "Dog killer Pshyco"));
+
 
             Console.Read();
         }

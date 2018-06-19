@@ -1,6 +1,11 @@
+﻿using RefactoringDogFront.Enum;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CodeSmellsWithinClasses.ToRefactor
+namespace RefactoringDogFront.Refactor
 {
     public class DogBuilder
     {
@@ -13,22 +18,20 @@ namespace CodeSmellsWithinClasses.ToRefactor
 
         public static implicit operator Dog(DogBuilder builder)
         {
-            return new Dog
-            {
-                DogHouseId = builder.dogHouseId,
-                IsInDogHouse = builder.isInDogHouse,
-                DepositAt = builder.depositAt,
-                Race = builder.race,
-                Name = builder.name,
-                Age = builder.age
-            };
+            return new Dog(
+                builder.dogHouseId,
+                builder.isInDogHouse,
+                builder.depositAt,
+                builder.race,
+                builder.name,
+                builder.age);
         }
 
         public DogBuilder InDogHouse()
         {
-            this.isInDogHouse = true;
-            this.depositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24)));
-            this.dogHouseId = Guid.NewGuid();
+            isInDogHouse = true;
+            depositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24)));
+            dogHouseId = Guid.NewGuid();
             return this;
         }
 
