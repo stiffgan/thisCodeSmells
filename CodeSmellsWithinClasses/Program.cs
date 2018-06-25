@@ -1,5 +1,4 @@
 ﻿using System;
-using RefactoringDogFront.Enum;
 using RefactoringDog.Application.Impl;
 using RefactoringDog.Infrastructure.Mocks;
 using RefactoringDogFront.Mapper;
@@ -16,25 +15,26 @@ namespace RefactoringDogFront
             var lazie = new DogBuilder();
             var rex = new DogBuilder();
 
-            pluto.WithName("Pluto").WithBreed(DogBreedEnum.Rotweiler).WithAge(1);
-            chelsea.WithName("Chelsea").WithBreed(DogBreedEnum.Boxer).WithAge(2);
-            rinTinTin.WithName("RintTinTin").WithBreed(DogBreedEnum.GermanShepherd).WithAge(5).InDogHouse();
-            lazie.WithName("Lazie").WithBreed(DogBreedEnum.Chihuahua).WithAge(1).InDogHouse();
-            rex.WithName("Rex").WithBreed(DogBreedEnum.GermanShepherd).WithAge(4).InDogHouse();
+
+            pluto.WithName("Pluto").WithBreed(new DogBreed("Rotweiler")).WithAge(1);
+            chelsea.WithName("Chelsea").WithBreed(new DogBreed("Boxer")).WithAge(2);
+            rinTinTin.WithName("RintTinTin").WithBreed(new DogBreed("GermanShepherd")).WithAge(5).InDogHouse();
+            lazie.WithName("Lazie").WithBreed(new DogBreed("Chihuahua")).WithAge(1).InDogHouse();
+            rex.WithName("Rex").WithBreed(new DogBreed("GermanShepherd")).WithAge(4).InDogHouse();
 
 
 
             var dogService = new DogService(new RefactorDogMockRepository(), new TicketService());
 
             Console.WriteLine(dogService.DepositDog(DogMapper.MapDogToDto(chelsea), "Amalfi"));
-            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.Chihuahua), "Amalfi"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(new DogBreed("Chihuahua")), "Amalfi"));
 
             Console.WriteLine(dogService.DepositDog(DogMapper.MapDogToDto(pluto), "Georgina"));
-            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.GermanShepherd), "Georgina"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(new DogBreed("GermanShepherd")), "Georgina"));
 
-            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.GermanShepherd), "Pau"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(new DogBreed("GermanShepherd")), "Pau"));
 
-            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(DogBreedEnum.Boxer), "Dog killer Pshyco"));
+            Console.WriteLine(dogService.AdoptDog(DogMapper.MapDogBreedToDto(new DogBreed("Boxer")), "Dog killer Pshyco"));
 
 
             Console.Read();

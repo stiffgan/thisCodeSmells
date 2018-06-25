@@ -40,9 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DogBreedDto.cs" />
     <Compile Include="DTOs\DogDto.cs" />
-    <Compile Include="Enums\DogBreedDto.cs" />
-    <Compile Include="Exceptions\DogBreedNotExistException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IDogService.cs" />
     <Compile Include="Services\ITicketService.cs" />

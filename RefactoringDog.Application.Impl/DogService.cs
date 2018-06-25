@@ -1,7 +1,6 @@
 ﻿using System;
 using RefactoringDog.Application.Contracts;
 using RefactoringDog.Application.Contracts.DTOs;
-using RefactoringDog.Application.Contracts.Enums;
 using Microsoft.VisualBasic;
 using RefactoringDog.Infrastructure.Contracts;
 using RefactoringDog.Application.Impl.Mappers;
@@ -24,7 +23,6 @@ namespace RefactoringDog.Application.Impl
 
         public string AdoptDog(DogBreedDto raceDto, string userName)
         {
-
             if (userName.Contains(MessagesDogs.DogKiller))
             {
                 return MessagesDogs.DogCallPolice;
@@ -39,7 +37,10 @@ namespace RefactoringDog.Application.Impl
 
             var dogDto = DogMapper.MapDogToDto(dog);
 
-            return _ticketService.GetTicket(userName, dogDto, GetCostAdopt(dogDto), MessagesDogs.DogAdopting); ;
+            var ticket = _ticketService.GetTicket(userName, dogDto, GetCostAdopt(dogDto), MessagesDogs.DogAdopting);
+            dog.IsInDogHouse = false;
+
+            return ticket;
         }
 
         public string DepositDog(DogDto dogDto, string userName)
@@ -66,21 +67,22 @@ namespace RefactoringDog.Application.Impl
             {
                 return MessagesDogs.DogOlder;
             }
-
-
+            
             dogDto.DogHouseId = Guid.NewGuid();
             dogDto.IsInDogHouse = true;
             dogDto.DepositAt = DateTime.UtcNow;
 
             _refactorDogRepository.DepositDog(DogMapper.MapDogToEntity(dogDto));
 
-            return _ticketService.GetTicket(userName, dogDto, GetCostDeposit(dogDto), MessagesDogs.DogDepositing); ;
+            var ticket = _ticketService.GetTicket(userName, dogDto, GetCostDeposit(dogDto), MessagesDogs.DogDepositing);
+
+            return ticket;
         }
 
         private double GetCostAdopt(DogDto dog)
         {
             var adoptPrice = 0.0;
-            if (dog.Race != DogBreedDto.Chihuahua)
+            if (dog.Race.Name != "Chihuahua")
             {
                 adoptPrice = HowLongInDogHouse(dog) * tax;
             }
@@ -95,7 +97,7 @@ namespace RefactoringDog.Application.Impl
         private int HowLongInDogHouse(DogDto dog)
         {
             var months = 0;
-            if (!dog.IsInDogHouse)
+            if (dog.IsInDogHouse)
             {
                 months = (int)(DateAndTime.DateDiff(DateInterval.Month, dog.DepositAt, DateTime.UtcNow));
             }

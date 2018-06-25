@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RefactoringDog.Application.Contracts.DTOs;
-using RefactoringDog.Application.Contracts.Enums;
 using RefactoringDog.Application.Impl;
 using RefactoringDog.Application.Literals;
 using RefactoringDog.Infrastructure.Mocks;
@@ -14,7 +13,7 @@ namespace RefactorinDog.IntegracionTest
         public void AdoptDog_When_Username_Killer()
         {
             var dogService = new DogService(new RefactorDogMockRepository(), new TicketService());
-            var message = dogService.AdoptDog(DogBreedDto.Boxer, "Dog killer");
+            var message = dogService.AdoptDog(new DogBreedDto { Name = "Boxer" }, "Dog killer");
 
             Assert.AreEqual(message, MessagesDogs.DogCallPolice);
         }
@@ -24,7 +23,7 @@ namespace RefactorinDog.IntegracionTest
             var dalsy = new DogDto()
             {
                 Name = "DALSY",
-                Race = DogBreedDto.Rotweiler,
+                Race = new DogBreedDto { Name = "Rotweiler" },
                 Age = 0
             };
 
@@ -39,7 +38,7 @@ namespace RefactorinDog.IntegracionTest
             var dalsy = new DogDto()
             {
                 Name = "DALSY",
-                Race = DogBreedDto.Rotweiler,
+                Race = new DogBreedDto { Name = "Rotweiler" },
                 Age = 20
             };
 
@@ -54,7 +53,7 @@ namespace RefactorinDog.IntegracionTest
             var dalsy = new DogDto()
             {
                 Name = "DALSY",
-                Race = DogBreedDto.Rotweiler,
+                Race = new DogBreedDto { Name = "Rotweiler" },
                 Age = 35
             };
 

@@ -1,5 +1,4 @@
 ﻿using RefactoringDog.Application.Contracts.DTOs;
-using RefactoringDog.Application.Contracts.Enums;
 
 namespace RefactoringDog.Application.Contracts
 {

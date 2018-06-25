@@ -1,6 +1,4 @@
 ﻿using RefactoringDog.Application.Contracts.DTOs;
-using RefactoringDog.Application.Contracts.Enums;
-using RefactoringDogFront.Enum;
 using RefactoringDogFront.Refactor;
 using System;
 
@@ -8,23 +6,12 @@ namespace RefactoringDogFront.Mapper
 {
     internal static class DogMapper
     {
-        public static DogBreedDto MapDogBreedToDto(DogBreedEnum race)
+        public static DogBreedDto MapDogBreedToDto(DogBreed race)
         {
-            switch (race)
+            return new DogBreedDto
             {
-                case DogBreedEnum.Boxer:
-                    return DogBreedDto.Boxer;
-                case DogBreedEnum.Bulldog:
-                    return DogBreedDto.Bulldog;
-                case DogBreedEnum.Chihuahua:
-                    return DogBreedDto.Chihuahua;
-                case DogBreedEnum.GermanShepherd:
-                    return DogBreedDto.GermanShepherd;
-                case DogBreedEnum.Rotweiler:
-                    return DogBreedDto.Rotweiler;
-                default:
-                    throw new Exception("Error");
-            }
+                Name = race.Name
+            };
         }
         public static DogDto MapDogToDto(Dog dog)
         {

@@ -1,9 +1,4 @@
-﻿using RefactoringDogFront.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace RefactoringDogFront.Refactor
 {
@@ -12,7 +7,7 @@ namespace RefactoringDogFront.Refactor
         private Guid dogHouseId;
         private bool isInDogHouse;
         private DateTime depositAt;
-        private DogBreedEnum race;
+        private DogBreed race;
         private string name;
         private int age;
 
@@ -53,7 +48,7 @@ namespace RefactoringDogFront.Refactor
             return this;
         }
 
-        public DogBuilder WithBreed(DogBreedEnum race)
+        public DogBuilder WithBreed(DogBreed race)
         {
             this.race = race;
             return this;

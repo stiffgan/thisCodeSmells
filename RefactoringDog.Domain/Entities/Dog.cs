@@ -1,5 +1,4 @@
 ﻿using System;
-using RefactoringDog.Domain.Enums;
 
 namespace RefactoringDog.Domain.Entities
 {

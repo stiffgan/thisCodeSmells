@@ -1,5 +1,4 @@
-﻿using RefactoringDogFront.Enum;
-using System;
+﻿using System;
 
 namespace RefactoringDogFront.Refactor
 {
@@ -8,11 +7,11 @@ namespace RefactoringDogFront.Refactor
         public Guid DogHouseId { get; set; }
         public bool IsInDogHouse { get; set; }
         public DateTime DepositAt { get; set; }
-        public DogBreedEnum Race { get; set; }
+        public DogBreed Race { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
 
-        public Dog(Guid dogHouseId, bool isInDogHouse, DateTime depositAt, DogBreedEnum race, string name, int age)
+        public Dog(Guid dogHouseId, bool isInDogHouse, DateTime depositAt, DogBreed race, string name, int age)
         {
             DogHouseId = DogHouseId;    
             IsInDogHouse = isInDogHouse;
@@ -22,6 +21,4 @@ namespace RefactoringDogFront.Refactor
             Age = age;
         }
     }
-
-
 }

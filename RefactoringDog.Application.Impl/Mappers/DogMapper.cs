@@ -1,10 +1,5 @@
 ﻿using RefactoringDog.Application.Contracts.DTOs;
-using RefactoringDog.Application.Contracts.Enums;
-using RefactoringDog.Application.Contracts.Exceptions;
 using RefactoringDog.Domain.Entities;
-using RefactoringDog.Domain.Enums;
-using System;
-
 
 namespace RefactoringDog.Application.Impl.Mappers
 {
@@ -12,44 +7,19 @@ namespace RefactoringDog.Application.Impl.Mappers
     {
         public static DogBreed MapDogBreedToEntity(DogBreedDto raceDto)
         {
-            switch (raceDto)
+            return new DogBreed
             {
-                case DogBreedDto.Boxer:
-                    return DogBreed.Boxer;
-                case DogBreedDto.Bulldog:
-                    return DogBreed.Bulldog;
-                case DogBreedDto.Chihuahua:
-                    return DogBreed.Chihuahua;
-                case DogBreedDto.GermanShepherd:
-                    return DogBreed.GermanShepherd;
-                case DogBreedDto.Rotweiler:
-                    return DogBreed.Rotweiler;
-                default:
-                    throw new DogBreedNotExistException("Dog breed not exist");
-            }
+                Name = raceDto.Name
+            };
 
         }
         public static DogBreedDto MapDogBreedToDto(DogBreed race)
         {
-            switch (race)
+            return new DogBreedDto
             {
-                case DogBreed.Boxer:
-                    return DogBreedDto.Boxer;
-                case DogBreed.Bulldog:
-                    return DogBreedDto.Bulldog;
-                case DogBreed.Chihuahua:
-                    return DogBreedDto.Chihuahua;
-                case DogBreed.GermanShepherd:
-                    return DogBreedDto.GermanShepherd;
-                case DogBreed.Rotweiler:
-                    return DogBreedDto.Rotweiler;
-                default:
-                    throw new Exception("Error");
-            }
-
+                Name = race.Name
+            };
         }
-
-
         public static DogDto MapDogToDto(Dog dog)
         {
             return new DogDto

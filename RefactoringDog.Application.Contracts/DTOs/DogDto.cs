@@ -1,4 +1,4 @@
-﻿using RefactoringDog.Application.Contracts.Enums;
+﻿
 using System;
 
 namespace RefactoringDog.Application.Contracts.DTOs
@@ -11,6 +11,6 @@ namespace RefactoringDog.Application.Contracts.DTOs
         public DogBreedDto Race { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-        public string Description => $"{Name}. {Race}. {Age} years.";
+        public string Description => $"{Name}. {Race.Name}. {Age} years.";
     }
 }

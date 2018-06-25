@@ -3,16 +3,44 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RefactoringDog.Domain.Entities;
-using RefactoringDog.Domain.Enums;
 
 namespace RefactoringDog.Infrastructure.Mocks
 {
     public class RefactorDogMockRepository : IRefactorDogRepository
     {
+        private static List<Dog> _dogs = new List<Dog>()
+        {
+            new Dog
+            {
+                DogHouseId = Guid.NewGuid(),
+                Name = "MAKI",
+                Age = 3,
+                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
+                IsInDogHouse = true,
+                Race = new DogBreed { Name = "Rotweiler" }
+            },
+            new Dog
+            {
+                DogHouseId = Guid.NewGuid(),
+                Name = "PIMI",
+                Age = 9,
+                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
+                IsInDogHouse = true,
+                Race = new DogBreed { Name = "Chihuahua" }
+            },
+            new Dog
+            {
+                DogHouseId= Guid.NewGuid(),
+                Name = "TIGER",
+                Age = 5,
+                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
+                IsInDogHouse = true,
+                Race = new DogBreed { Name = "GermanShepherd" }
+            }
+        };
         public Dog AdoptDog(DogBreed race)
         {
-            var dog = _dogs.Where(x => x.Race == race).FirstOrDefault();
-
+            var dog = _dogs.Where(x => x.Race.Name == race.Name && x.IsInDogHouse).FirstOrDefault();
             return dog;
         }
 
@@ -25,36 +53,5 @@ namespace RefactoringDog.Infrastructure.Mocks
         {
             return _dogs;
         }
-
-        private readonly List<Dog> _dogs = new List<Dog>()
-        {
-            new Dog
-            {
-                DogHouseId = Guid.NewGuid(),
-                Name = "MAKI",
-                Age = 3,
-                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
-                IsInDogHouse = true,
-                Race = DogBreed.Rotweiler
-            },
-            new Dog
-            {
-                DogHouseId = Guid.NewGuid(),
-                Name = "PIMI",
-                Age = 9,
-                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
-                IsInDogHouse = true,
-                Race = DogBreed.Chihuahua
-            },
-            new Dog
-            {
-                DogHouseId= Guid.NewGuid(),
-                Name = "TIGER",
-                Age = 5,
-                DepositAt = DateTime.UtcNow.AddMonths(-(new Random().Next(0, 24))),
-                IsInDogHouse = true,
-                Race= DogBreed.GermanShepherd
-            }
-        };
     }
 }
